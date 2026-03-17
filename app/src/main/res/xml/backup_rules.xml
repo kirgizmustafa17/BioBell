@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- Include alarm database -->
+    <include domain="database" path="biobell_alarms.db" />
+    <!-- Include DataStore preferences -->
+    <include domain="sharedpref" path="." />
+    <!-- Exclude cache files -->
+    <exclude domain="cache" path="." />
+    <exclude domain="external-cache" path="." />
+</full-backup-content>
