@@ -87,31 +87,31 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| ALARM-01 | — | Pending |
-| ALARM-02 | — | Pending |
-| ALARM-03 | — | Pending |
-| ALARM-04 | — | Pending |
-| ALARM-05 | — | Pending |
-| ALARM-06 | — | Pending |
-| ALARM-07 | — | Pending |
-| ALARM-08 | — | Pending |
-| ALARM-09 | — | Pending |
-| SLEEP-01 | — | Pending |
-| SLEEP-02 | — | Pending |
-| SLEEP-03 | — | Pending |
-| SLEEP-04 | — | Pending |
-| SLEEP-05 | — | Pending |
-| EDU-01 | — | Pending |
-| EDU-02 | — | Pending |
-| CHRON-01 | — | Pending |
-| CHRON-02 | — | Pending |
-| BACKUP-01 | — | Pending |
-| BACKUP-02 | — | Pending |
+| ALARM-01 | Phase 3 + Phase 5 | Pending |
+| ALARM-02 | Phase 3 + Phase 6 | Pending |
+| ALARM-03 | Phase 3 + Phase 6 | Pending |
+| ALARM-04 | Phase 3 + Phase 6 | Pending |
+| ALARM-05 | Phase 4 | Pending |
+| ALARM-06 | Phase 4 | Pending |
+| ALARM-07 | Phase 4 | Pending |
+| ALARM-08 | Phase 6 | Pending |
+| ALARM-09 | Phase 4 | Pending |
+| SLEEP-01 | Phase 2 + Phase 5 | Pending |
+| SLEEP-02 | Phase 2 + Phase 5 | Pending |
+| SLEEP-03 | Phase 2 + Phase 5 | Pending |
+| SLEEP-04 | Phase 2 + Phase 5 | Pending |
+| SLEEP-05 | Phase 2 + Phase 5 | Pending |
+| EDU-01 | Phase 5 | Pending |
+| EDU-02 | Phase 5 | Pending |
+| CHRON-01 | Phase 7 | Pending |
+| CHRON-02 | Phase 7 | Pending |
+| BACKUP-01 | Phase 7 | Pending |
+| BACKUP-02 | Phase 7 | Pending |
 
 **Coverage:**
 - v1 requirements: 20 total
-- Mapped to phases: 0
-- Unmapped: 20 ⚠️ *(will be resolved after roadmap creation)*
+- Mapped to phases: 20 ✓
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-03-17*
