@@ -12,7 +12,7 @@
 
 | # | Phase | Goal | Requirements | Success Criteria |
 |---|-------|------|--------------|-----------------|
-| 1 | Project Foundation | Runnable Android app with M3 theme and navigation skeleton | — | 3 |
+| 1 | Project Foundation | Complete    | 2026-03-17 | 3 |
 | 2 | Sleep Math Engine | Pure Kotlin domain logic for all sleep science calculations | SLEEP-01, SLEEP-02, SLEEP-03, SLEEP-04, SLEEP-05 | 4 |
 | 3 | Data Layer | Alarm persistence (Room) and user settings (DataStore) | ALARM-01, ALARM-02, ALARM-03, ALARM-04 | 3 |
 | 4 | Alarm System | Reliable alarm scheduling, firing, dismiss, snooze, reboot recovery | ALARM-05, ALARM-06, ALARM-07, ALARM-09 | 5 |
@@ -33,7 +33,7 @@
 **Requirements mapped:** *(foundational — no v1 requirements directly; enables all phases)*
 
 **Plans:**
-1. Initialize Gradle project with KTS build scripts, Kotlin 2.0, min SDK 31, target SDK 34
+5/5 plans complete
 2. Add Jetpack Compose BOM, Material3, and Accompanist dependencies
 3. Set up M3 theme with dynamic color + fallback light/dark color schemes, typography (Inter font), shapes
 4. Create single-Activity Compose app with NavGraph (placeholder screens: AlarmSetter, AlarmList, Settings)
