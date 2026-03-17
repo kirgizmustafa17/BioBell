@@ -17,7 +17,7 @@
 | Complete    | 2026-03-17 | Alarm persistence (Room) and user settings (DataStore) | ALARM-01, ALARM-02, ALARM-03, ALARM-04 | 3 |
 | 4 | Alarm System | Reliable alarm scheduling, firing, dismiss, snooze, reboot recovery | ALARM-05, ALARM-06, ALARM-07, ALARM-09 | 5 |
 | Complete    | 2026-03-17 | Core bidirectional alarm calculator screen — BioBell's USP | ALARM-01 (UI), SLEEP-01, SLEEP-02, SLEEP-03, SLEEP-05, EDU-01, EDU-02 | 5 |
-| 6 | Alarm List & Management | Full alarm management UX — list, toggle, edit, delete, repeat | ALARM-02, ALARM-03, ALARM-04, ALARM-08 | 3 |
+| 6 | Alarm List & Management | Complete    | 2026-03-17 | 3 |
 | 7 | Settings, Chronotype & Backup | Chronotype picker, app settings, onboarding, Auto Backup | CHRON-01, CHRON-02, BACKUP-01, BACKUP-02 | 4 |
 
 ---
@@ -156,7 +156,7 @@
 **Requirements mapped:** ALARM-02, ALARM-03, ALARM-04, ALARM-08
 
 **Plans:**
-1. Implement `AlarmListScreen`: shows list of `AlarmCard` composables; FAB to create new alarm; empty state illustration with call-to-action
+0/0 plans complete
 2. Build `AlarmCard` composable: displays wake time (large), health badge (small), label, repeat days abbreviations, enable/disable `Switch`
 3. Implement `AlarmListViewModel`: observes `AlarmRepository.getAllAlarms()` as `StateFlow<List<AlarmUiModel>>`; handles toggle (update DB + reschedule/cancel AlarmManager), delete (with undo snackbar)
 4. Wire edit flow: tap AlarmCard body → navigate to `AlarmSetterScreen` pre-populated with existing alarm data
