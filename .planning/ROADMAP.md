@@ -14,7 +14,7 @@
 |---|-------|------|--------------|-----------------|
 | 1 | Project Foundation | Complete    | 2026-03-17 | 3 |
 | Complete    | 2026-03-17 | Complete    | 2026-03-17 | 4 |
-| 3 | Data Layer | Alarm persistence (Room) and user settings (DataStore) | ALARM-01, ALARM-02, ALARM-03, ALARM-04 | 3 |
+| Complete    | 2026-03-17 | Alarm persistence (Room) and user settings (DataStore) | ALARM-01, ALARM-02, ALARM-03, ALARM-04 | 3 |
 | 4 | Alarm System | Reliable alarm scheduling, firing, dismiss, snooze, reboot recovery | ALARM-05, ALARM-06, ALARM-07, ALARM-09 | 5 |
 | 5 | Alarm Setter UI | Core bidirectional alarm calculator screen — BioBell's USP | ALARM-01 (UI), SLEEP-01, SLEEP-02, SLEEP-03, SLEEP-05, EDU-01, EDU-02 | 5 |
 | 6 | Alarm List & Management | Full alarm management UX — list, toggle, edit, delete, repeat | ALARM-02, ALARM-03, ALARM-04, ALARM-08 | 3 |
@@ -109,7 +109,7 @@
 **Requirements mapped:** ALARM-05, ALARM-06, ALARM-07, ALARM-09
 
 **Plans:**
-1. Declare required manifest permissions: `USE_EXACT_ALARM`, `RECEIVE_BOOT_COMPLETED`, `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_MEDIA_PLAYBACK`, `POST_NOTIFICATIONS` (API 33+ runtime request)
+0/0 plans complete
 2. Implement `AlarmSchedulerImpl`: wraps `AlarmManager.setAlarmClock()` for scheduling; cancel by `PendingIntent` ID; always use `FLAG_IMMUTABLE`
 3. Implement `AlarmReceiver` (BroadcastReceiver): receives alarm trigger → starts `AlarmForegroundService`
 4. Implement `AlarmForegroundService`: acquires WakeLock, plays ringtone via `MediaPlayer`, shows full-screen notification intent; handles `ACTION_DISMISS` and `ACTION_SNOOZE` intents
