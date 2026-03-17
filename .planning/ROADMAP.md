@@ -16,7 +16,7 @@
 | Complete    | 2026-03-17 | Complete    | 2026-03-17 | 4 |
 | Complete    | 2026-03-17 | Alarm persistence (Room) and user settings (DataStore) | ALARM-01, ALARM-02, ALARM-03, ALARM-04 | 3 |
 | 4 | Alarm System | Reliable alarm scheduling, firing, dismiss, snooze, reboot recovery | ALARM-05, ALARM-06, ALARM-07, ALARM-09 | 5 |
-| 5 | Alarm Setter UI | Core bidirectional alarm calculator screen — BioBell's USP | ALARM-01 (UI), SLEEP-01, SLEEP-02, SLEEP-03, SLEEP-05, EDU-01, EDU-02 | 5 |
+| Complete    | 2026-03-17 | Core bidirectional alarm calculator screen — BioBell's USP | ALARM-01 (UI), SLEEP-01, SLEEP-02, SLEEP-03, SLEEP-05, EDU-01, EDU-02 | 5 |
 | 6 | Alarm List & Management | Full alarm management UX — list, toggle, edit, delete, repeat | ALARM-02, ALARM-03, ALARM-04, ALARM-08 | 3 |
 | 7 | Settings, Chronotype & Backup | Chronotype picker, app settings, onboarding, Auto Backup | CHRON-01, CHRON-02, BACKUP-01, BACKUP-02 | 4 |
 
@@ -133,7 +133,7 @@
 **Requirements mapped:** ALARM-01 (UI), SLEEP-01, SLEEP-02, SLEEP-03, SLEEP-05, EDU-01, EDU-02
 
 **Plans:**
-1. Design and implement `AlarmSetterScreen` layout: time picker (wake time), duration picker (hours + minutes), suggested bedtimes carousel, health badge component, warning banner
+0/0 plans complete
 2. Implement `AlarmSetterViewModel`: holds `SleepPlanUiState`; on any input change, calls `SleepMathEngine` and emits updated state (`suggestedBedtimes`, `healthScore`, `warnings`, `resolvedAlarmTime`)
 3. Build `SleepHealthBadge` composable: letter grade (A/B/C/D/F) + color-coded ring (green → red) + short description
 4. Build `SleepWarningBanner` composable: inline contextual tip (e.g., "Only 5h planned — below your recommended 7h30m")
