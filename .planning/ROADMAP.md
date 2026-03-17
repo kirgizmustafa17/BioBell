@@ -18,7 +18,7 @@
 | 4 | Alarm System | Reliable alarm scheduling, firing, dismiss, snooze, reboot recovery | ALARM-05, ALARM-06, ALARM-07, ALARM-09 | 5 |
 | Complete    | 2026-03-17 | Core bidirectional alarm calculator screen — BioBell's USP | ALARM-01 (UI), SLEEP-01, SLEEP-02, SLEEP-03, SLEEP-05, EDU-01, EDU-02 | 5 |
 | 6 | Alarm List & Management | Complete    | 2026-03-17 | 3 |
-| 7 | Settings, Chronotype & Backup | Chronotype picker, app settings, onboarding, Auto Backup | CHRON-01, CHRON-02, BACKUP-01, BACKUP-02 | 4 |
+| 7 | Settings, Chronotype & Backup | Complete    | 2026-03-17 | 4 |
 
 ---
 
@@ -178,7 +178,7 @@
 **Requirements mapped:** CHRON-01, CHRON-02, BACKUP-01, BACKUP-02
 
 **Plans:**
-1. Implement first-launch onboarding flow: single-screen chronotype picker (🦉/🐦/🐓 cards with description); stores to DataStore; sets `onboardingComplete = true`
+0/0 plans complete
 2. Implement `SettingsScreen`: chronotype picker (re-selectable), 12h/24h time format toggle (respects system default), about/version info, link to GitHub/privacy policy placeholder
 3. Implement battery optimization prompt: after first alarm is saved, check `PowerManager.isIgnoringBatteryOptimizations()`; if not ignored, show one-time bottom sheet guiding user to Settings → Battery → BioBell → Don't Optimize; store `batteryOptimizationPromptShown = true` so it never repeats
 4. Configure Android Auto Backup: `android:allowBackup="true"` in manifest; create `res/xml/backup_rules.xml` to include `alarms.db` + DataStore preferences file; exclude cache/temp files
