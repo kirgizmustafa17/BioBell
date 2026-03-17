@@ -13,7 +13,7 @@
 | # | Phase | Goal | Requirements | Success Criteria |
 |---|-------|------|--------------|-----------------|
 | 1 | Project Foundation | Complete    | 2026-03-17 | 3 |
-| 2 | Sleep Math Engine | Complete    | 2026-03-17 | 4 |
+| Complete    | 2026-03-17 | Complete    | 2026-03-17 | 4 |
 | 3 | Data Layer | Alarm persistence (Room) and user settings (DataStore) | ALARM-01, ALARM-02, ALARM-03, ALARM-04 | 3 |
 | 4 | Alarm System | Reliable alarm scheduling, firing, dismiss, snooze, reboot recovery | ALARM-05, ALARM-06, ALARM-07, ALARM-09 | 5 |
 | 5 | Alarm Setter UI | Core bidirectional alarm calculator screen — BioBell's USP | ALARM-01 (UI), SLEEP-01, SLEEP-02, SLEEP-03, SLEEP-05, EDU-01, EDU-02 | 5 |
@@ -86,7 +86,7 @@
 **Requirements mapped:** ALARM-01 (data), ALARM-02 (data), ALARM-03 (data), ALARM-04 (data)
 
 **Plans:**
-1. Set up Room database: `AlarmDatabase`, `AlarmEntity` (id, wakeTime, bedtime, duration, repeatDays, isEnabled, label, ringtoneUri, isVibrate), `AlarmDao` (insert/update/delete/getAll/getById)
+0/0 plans complete
 2. Migration strategy: `Migration(1, 2)` skeleton + `fallbackToDestructiveMigration()` for debug only
 3. Implement `AlarmRepositoryImpl` wrapping `AlarmDao` (Kotlin Flow for reactive list)
 4. Set up `DataStore<Preferences>` for: `chronotype`, `onboardingComplete`, `batteryOptimizationPromptShown`
