@@ -10,6 +10,8 @@ import com.biobell.android.ui.alarm.AlarmListScreen
 import com.biobell.android.ui.alarm.AlarmSetterScreen
 import com.biobell.android.ui.settings.SettingsScreen
 
+import androidx.compose.ui.Modifier
+
 /**
  * BioBell navigation graph.
  *
@@ -19,10 +21,14 @@ import com.biobell.android.ui.settings.SettingsScreen
  * - [Screen.Settings]    — App settings (bottom nav tab)
  */
 @Composable
-fun BioBellNavGraph(navController: NavHostController) {
+fun BioBellNavGraph(
+    navController: NavHostController,
+    modifier: Modifier = Modifier,
+) {
     NavHost(
         navController = navController,
         startDestination = Screen.AlarmList.route,
+        modifier = modifier,
     ) {
         composable(Screen.AlarmList.route) {
             AlarmListScreen(

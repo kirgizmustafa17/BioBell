@@ -23,6 +23,7 @@ fun BioBellApp() {
     ) { innerPadding ->
         BioBellNavGraph(
             navController = navController,
+            modifier = Modifier.padding(innerPadding),
         )
     }
 }
