@@ -27,6 +27,35 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Receives AlarmManager callbacks when an alarm fires -->
+        <receiver
+            android:name=".alarm.AlarmReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.biobell.android.ACTION_ALARM_TRIGGERED" />
+                <action android:name="com.biobell.android.ACTION_DISMISS" />
+                <action android:name="com.biobell.android.ACTION_SNOOZE" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Reschedules alarms after device reboot -->
+        <receiver
+            android:name=".alarm.BootReceiver"
+            android:exported="true"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Foreground service that plays the alarm ringtone -->
+        <service
+            android:name=".alarm.AlarmForegroundService"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback" />
+
     </application>
 
 </manifest>
