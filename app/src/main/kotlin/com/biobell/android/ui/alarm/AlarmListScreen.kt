@@ -146,7 +146,7 @@ private fun AlarmList(
                 visible = !isDeleted,
                 enter = fadeIn(tween(150)) + slideInVertically { -it / 4 },
                 exit = fadeOut(tween(150)),
-                modifier = Modifier.animateItemPlacement(),
+                modifier = Modifier.animateItem(),
             ) {
                 SwipeToDismissBox(
                     state = dismissState,
