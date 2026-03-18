@@ -12,6 +12,10 @@ local.properties
 *.keystore
 benim_keyim
 
+# AI agent / planning (internal tooling)
+.agent/
+.planning/
+
 # IDE
 .idea/
 *.iml
