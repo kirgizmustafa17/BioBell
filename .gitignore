@@ -1,0 +1,22 @@
+# Build outputs
+/build/
+/app/build/
+/*/build/
+
+# Gradle wrapper (keep gradlew + wrapper jar, but not the dist)
+.gradle/
+
+# Local config — never commit
+local.properties
+*.jks
+*.keystore
+benim_keyim
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
