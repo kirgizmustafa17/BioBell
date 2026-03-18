@@ -17,6 +17,7 @@ import android.os.PowerManager
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.biobell.android.MainActivity
 import com.biobell.android.domain.repository.AlarmRepository
@@ -27,6 +28,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.LocalDateTime
 import java.time.ZoneId
 import javax.inject.Inject
@@ -77,8 +79,10 @@ class AlarmForegroundService : Service() {
     }
 
     private fun handleAlarmTriggered(alarmId: Long) {
+        Log.d(TAG, "handleAlarmTriggered: alarmId=$alarmId")
         acquireWakeLock()
         startForeground(NOTIFICATION_ID, buildRingingNotification(alarmId))
+        Log.d(TAG, "startForeground called")
         playRingtone(alarmId)
         startVibration()
     }
@@ -113,30 +117,40 @@ class AlarmForegroundService : Service() {
     }
 
     private fun playRingtone(alarmId: Long) {
-        try {
-            serviceScope.launch {
-                val alarm = alarmRepository.getAlarmById(alarmId)
-                val ringtoneUri: Uri = alarm?.ringtoneUri?.let { Uri.parse(it) }
-                    ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
-                    ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
+        serviceScope.launch {
+            try {
+                val ringtoneUri: Uri = withContext(Dispatchers.IO) {
+                    val alarm = alarmRepository.getAlarmById(alarmId)
+                    alarm?.ringtoneUri?.let { Uri.parse(it) }
+                        ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+                        ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
+                }
+
+                val audioAttributes = AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_ALARM)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .setLegacyStreamType(AudioManager.STREAM_ALARM)
+                    .build()
 
                 mediaPlayer?.release()
                 mediaPlayer = MediaPlayer().apply {
-                    setAudioAttributes(
-                        AudioAttributes.Builder()
-                            .setUsage(AudioAttributes.USAGE_ALARM)
-                            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                            .setLegacyStreamType(AudioManager.STREAM_ALARM)
-                            .build()
-                    )
+                    setAudioAttributes(audioAttributes)
+                    setOnPreparedListener { mp ->
+                        mp.isLooping = true
+                        mp.start()
+                        Log.d(TAG, "Ringtone started")
+                    }
+                    setOnErrorListener { _, what, extra ->
+                        Log.e(TAG, "MediaPlayer error: what=$what extra=$extra")
+                        false
+                    }
                     setDataSource(this@AlarmForegroundService, ringtoneUri)
-                    isLooping = true
-                    prepare()
-                    start()
+                    prepareAsync()  // Non-blocking — callback via setOnPreparedListener
                 }
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to play ringtone", e)
+                // Fallback: best-effort, don't crash
             }
-        } catch (e: Exception) {
-            // Fallback — best effort; don't crash if audio fails
         }
     }
 
@@ -222,17 +236,29 @@ class AlarmForegroundService : Service() {
     }
 
     private fun createNotificationChannel() {
+        val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+            ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
+        val audioAttributes = AudioAttributes.Builder()
+            .setUsage(AudioAttributes.USAGE_ALARM)
+            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+            .build()
+
         val channel = NotificationChannel(
             CHANNEL_ID,
-            "Alarm",
+            "Alarms",
             NotificationManager.IMPORTANCE_HIGH,
         ).apply {
-            description = "BioBell alarm notifications"
+            description = "BioBell alarm ringtone and lockscreen UI"
             setBypassDnd(true)
             setShowBadge(false)
+            enableVibration(true)
+            vibrationPattern = longArrayOf(0, 500, 500, 500, 500, 500)
+            setSound(alarmSound, audioAttributes)
+            lockscreenVisibility = android.app.Notification.VISIBILITY_PUBLIC
         }
-        val notificationManager = getSystemService(NotificationManager::class.java)
-        notificationManager.createNotificationChannel(channel)
+        val nm = getSystemService(NotificationManager::class.java)
+        nm.createNotificationChannel(channel)
+        Log.d(TAG, "Notification channel created: $CHANNEL_ID")
     }
 
     override fun onDestroy() {
@@ -245,6 +271,7 @@ class AlarmForegroundService : Service() {
     }
 
     companion object {
+        private const val TAG = "AlarmForegroundService"
         private const val CHANNEL_ID = "biobell_alarm_channel"
         private const val NOTIFICATION_ID = 1
     }
