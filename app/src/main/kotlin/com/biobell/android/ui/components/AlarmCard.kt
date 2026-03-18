@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.biobell.android.domain.model.Alarm
+import com.biobell.android.ui.components.gradeColors
 import java.time.DayOfWeek
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
@@ -103,13 +104,13 @@ fun AlarmCard(
                         // Health grade chip
                         Surface(
                             shape = MaterialTheme.shapes.extraSmall,
-                            color = gradeColor(plan.healthScore.grade.name)
+                            color = gradeColors(plan.healthScore.grade).first
                                 .copy(alpha = if (alarm.isEnabled) 0.85f else 0.4f),
                         ) {
                             Text(
                                 text = plan.healthScore.grade.label,
                                 style = MaterialTheme.typography.labelSmall,
-                                color = androidx.compose.ui.graphics.Color.White,
+                                color = gradeColors(plan.healthScore.grade).second,
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier.padding(horizontal = 5.dp, vertical = 2.dp),
                             )
@@ -128,7 +129,7 @@ fun AlarmCard(
                 } else {
                     Spacer(modifier = Modifier.height(2.dp))
                     Text(
-                        text = "Once",
+                        text = "One-time",
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = contentAlpha),
                     )
@@ -145,13 +146,6 @@ fun AlarmCard(
     }
 }
 
-private fun gradeColor(grade: String): androidx.compose.ui.graphics.Color = when (grade) {
-    "A" -> androidx.compose.ui.graphics.Color(0xFF2E7D32)
-    "B" -> androidx.compose.ui.graphics.Color(0xFF388E3C)
-    "C" -> androidx.compose.ui.graphics.Color(0xFFF9A825)
-    "D" -> androidx.compose.ui.graphics.Color(0xFFE65100)
-    else -> androidx.compose.ui.graphics.Color(0xFFC62828)
-}
 
 private fun formatRepeatDays(days: Set<DayOfWeek>): String {
     if (days.size == 7) return "Every day"

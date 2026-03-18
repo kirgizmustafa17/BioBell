@@ -197,7 +197,7 @@ fun HealthBadge(
 }
 
 @Composable
-private fun gradeColors(grade: HealthScore.Grade): Pair<Color, Color> {
+internal fun gradeColors(grade: HealthScore.Grade): Pair<Color, Color> {
     val colors = MaterialTheme.colorScheme
     return when (grade) {
         HealthScore.Grade.A -> Pair(Color(0xFF2E7D32), Color.White)  // green
