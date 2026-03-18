@@ -24,6 +24,9 @@ sealed class Screen(val route: String) {
 
     /** Settings — chronotype, preferences, about */
     object Settings : Screen("settings")
+
+    /** First-launch permission onboarding */
+    object PermissionSetup : Screen("permission_setup")
 }
 
 /** Model for bottom navigation bar items */
