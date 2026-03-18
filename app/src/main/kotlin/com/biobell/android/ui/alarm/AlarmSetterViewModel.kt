@@ -131,19 +131,33 @@ class AlarmSetterViewModel @Inject constructor(
         val state = _uiState.value
         val plan = state.selectedPlan ?: return
 
+        _uiState.update { it.copy(isSaving = true) }
+
         viewModelScope.launch {
-            val alarm = Alarm(
-                id = alarmId ?: 0L,
-                wakeTime = plan.wakeTime,
-                label = state.alarmLabel,
-                isEnabled = true,
-                isVibrate = state.isVibrate,
-                snoozeDurationMinutes = state.snoozeDurationMinutes,
-                sleepPlan = plan,
-            )
-            val savedId = alarmRepository.insertAlarm(alarm)
-            alarmScheduler.schedule(alarm.copy(id = savedId))
-            onComplete()
+            try {
+                val alarm = Alarm(
+                    id = alarmId ?: 0L,
+                    wakeTime = plan.wakeTime,
+                    label = state.alarmLabel,
+                    isEnabled = true,
+                    isVibrate = state.isVibrate,
+                    snoozeDurationMinutes = state.snoozeDurationMinutes,
+                    sleepPlan = plan,
+                )
+                val savedId = alarmRepository.insertAlarm(alarm)
+                // Schedule separately — a SecurityException here must NOT crash the app.
+                // The alarm is already saved; user can reschedule from the list.
+                try {
+                    alarmScheduler.schedule(alarm.copy(id = savedId))
+                } catch (e: SecurityException) {
+                    // Exact alarm permission not granted yet (API 31-32).
+                    // Alarm is saved in DB; user will be prompted for permission separately.
+                    android.util.Log.w("AlarmSetter", "Exact alarm permission denied: ${e.message}")
+                }
+                onComplete()
+            } finally {
+                _uiState.update { it.copy(isSaving = false) }
+            }
         }
     }
 

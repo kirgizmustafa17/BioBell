@@ -18,6 +18,7 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
 import androidx.core.app.NotificationCompat
+import com.biobell.android.MainActivity
 import com.biobell.android.domain.repository.AlarmRepository
 import com.biobell.android.domain.repository.AlarmScheduler
 import dagger.hilt.android.AndroidEntryPoint
@@ -178,7 +179,7 @@ class AlarmForegroundService : Service() {
     }
 
     private fun buildRingingNotification(alarmId: Long): Notification {
-        val fullScreenIntent = Intent(this, Class.forName("com.biobell.android.MainActivity")).apply {
+        val fullScreenIntent = Intent(this, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
             putExtra(AlarmReceiver.EXTRA_ALARM_ID, alarmId)
         }
